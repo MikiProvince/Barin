@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Хозяин Барин</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-bg-light: #f7f6f2;
+      --color-bg-dark: #2a2c2b;
+      --color-accent-green: #4f634c;
+      --color-accent-brass: #bda573;
+      --color-text-dark: #2a2c2b;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Montserrat", sans-serif;
+      background-color: var(--color-bg-light);
+      color: var(--color-text-dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1,
+    h2,
+    h3 {
+      margin: 0;
+      font-family: "Cormorant Garamond", serif;
+      font-weight: 600;
+      line-height: 1.1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .btn,
+    .btn-solid {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.95rem 1.8rem;
+      border: 1px solid transparent;
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn {
+      background-color: transparent;
+      color: var(--color-accent-brass);
+      border-color: var(--color-accent-brass);
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      background-color: var(--color-accent-brass);
+      color: var(--color-bg-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-solid {
+      background-color: var(--color-accent-green);
+      color: var(--color-bg-light);
+      border-color: var(--color-accent-green);
+    }
+
+    .btn-solid:hover,
+    .btn-solid:focus-visible {
+      background-color: transparent;
+      color: var(--color-accent-green);
+      border-color: var(--color-accent-green);
+      transform: translateY(-1px);
+    }
+
+    .hero .btn-solid {
+      position: relative;
+      padding: 1.15rem 2.6rem;
+      border: 1px solid rgba(189, 165, 115, 0.7);
+      background:
+        linear-gradient(135deg, rgba(79, 99, 76, 0.96), rgba(42, 44, 43, 0.92));
+      color: var(--color-bg-light);
+      box-shadow: 0 18px 40px rgba(20, 22, 21, 0.28);
+      overflow: hidden;
+    }
+
+    .hero .btn-solid::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border: 1px solid rgba(189, 165, 115, 0.28);
+      pointer-events: none;
+    }
+
+    .hero .btn-solid:hover,
+    .hero .btn-solid:focus-visible {
+      background:
+        linear-gradient(135deg, rgba(189, 165, 115, 0.92), rgba(79, 99, 76, 0.96));
+      color: var(--color-bg-light);
+      border-color: rgba(189, 165, 115, 0.95);
+      transform: translateY(-3px);
+      box-shadow: 0 24px 50px rgba(20, 22, 21, 0.34);
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(42, 44, 43, 0.98);
+      border-bottom: 1px solid rgba(189, 165, 115, 0.45);
+      backdrop-filter: blur(10px);
+    }
+
+    .site-header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      color: var(--color-bg-light);
+    }
+
+    .brand-mark__image {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
+    .brand-mark__text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-mark__title {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .brand-mark__subtitle {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: rgba(247, 246, 242, 0.72);
+      margin-top: 0.25rem;
+    }
+
+    .site-nav ul {
+      display: flex;
+      align-items: center;
+      gap: 1.15rem;
+    }
+
+    .site-nav a {
+      font-size: 0.76rem;
+      font-weight: 500;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      color: var(--color-bg-light);
+      transition: color 0.3s ease;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus-visible {
+      color: var(--color-accent-brass);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      border: 1px solid rgba(189, 165, 115, 0.45);
+      background: rgba(247, 246, 242, 0.03);
+      color: var(--color-bg-light);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .menu-toggle:hover,
+    .menu-toggle:focus-visible {
+      border-color: rgba(189, 165, 115, 0.9);
+      background: rgba(247, 246, 242, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .menu-toggle__lines,
+    .menu-toggle__lines::before,
+    .menu-toggle__lines::after {
+      display: block;
+      width: 18px;
+      height: 1.5px;
+      background-color: currentColor;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      content: "";
+    }
+
+    .menu-toggle__lines {
+      position: relative;
+    }
+
+    .menu-toggle__lines::before {
+      position: absolute;
+      top: -6px;
+      left: 0;
+    }
+
+    .menu-toggle__lines::after {
+      position: absolute;
+      top: 6px;
+      left: 0;
+    }
+
+    .site-header.is-open .menu-toggle__lines {
+      background-color: transparent;
+    }
+
+    .site-header.is-open .menu-toggle__lines::before {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .site-header.is-open .menu-toggle__lines::after {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 7rem 1.5rem 4rem;
+      background-image:
+        linear-gradient(rgba(42, 44, 43, 0.62), rgba(42, 44, 43, 0.72)),
+        url("assets/bg.png");
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(3.2rem, 8vw, 6rem);
+      margin-bottom: 1.25rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .hero__inner {
+      max-width: 760px;
+      text-align: center;
+      color: var(--color-bg-light);
+    }
+
+    .hero p {
+      margin: 0 auto 2rem;
+      max-width: 600px;
+      font-weight: 300;
+      font-size: 1.05rem;
+    }
+
+    .hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .services {
+      background-color: var(--color-bg-light);
+      padding: 6rem 1.5rem;
+    }
+
+    .services__inner {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .services__header {
+      max-width: 720px;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+
+    .services__eyebrow {
+      margin-bottom: 0.85rem;
+      color: var(--color-accent-green);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .services h2 {
+      font-size: clamp(2.5rem, 5vw, 4.25rem);
+      margin-bottom: 0.75rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.5rem;
+      align-items: stretch;
+    }
+
+    .service-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 0.9rem;
+      height: 100%;
+      overflow: hidden;
+      background-color: #ffffff;
+      border: 1px solid rgba(189, 165, 115, 0.55);
+      padding: 2.1rem;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .service-card::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: 1px solid rgba(189, 165, 115, 0.18);
+      pointer-events: none;
+    }
+
+    .service-card:hover,
+    .service-card:focus-within {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(42, 44, 43, 0.1);
+    }
+
+    .service-card__icon {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 1.5rem;
+      background-color: var(--color-accent-green);
+    }
+
+    .service-icon {
+      display: block;
+      width: 54px;
+      height: 54px;
+    }
+
+    .service-icon-badge {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 84px;
+      height: 84px;
+      margin-bottom: 0.15rem;
+      border: 1px solid rgba(189, 165, 115, 0.42);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(189, 165, 115, 0.14), transparent 58%),
+        linear-gradient(145deg, rgba(79, 99, 76, 0.12), rgba(42, 44, 43, 0.04));
+      box-shadow: 0 12px 24px rgba(42, 44, 43, 0.08);
+    }
+
+    .service-icon-badge::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: 1px solid rgba(189, 165, 115, 0.18);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .service-card h3 {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: 2rem;
+      line-height: 0.95;
+      color: var(--color-bg-dark);
+    }
+
+    .service-card p {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: 0.98rem;
+      max-width: 28ch;
+      color: rgba(42, 44, 43, 0.82);
+    }
+
+    .merch-section {
+      background-color: var(--color-accent-green);
+      color: var(--color-bg-light);
+      padding: 6rem 1.5rem;
+    }
+
+    .merch-section__inner {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .merch-section__header {
+      max-width: 760px;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+
+    .merch-section h2 {
+      margin-bottom: 0.85rem;
+      color: var(--color-accent-brass);
+      font-size: clamp(2.5rem, 5vw, 4.25rem);
+    }
+
+    .merch-section__subtitle {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(247, 246, 242, 0.88);
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    .merch-item {
+      position: relative;
+      overflow: hidden;
+      background-color: var(--color-bg-dark);
+      border: 1px solid rgba(189, 165, 115, 0.7);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .merch-item::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border: 1px solid rgba(189, 165, 115, 0.28);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .merch-item:hover,
+    .merch-item:focus-within {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(23, 24, 24, 0.22);
+    }
+
+    .mockup-img {
+      display: block;
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      filter: sepia(0.2) grayscale(0.2);
+    }
+
+    .merch-item__body {
+      position: relative;
+      z-index: 2;
+      padding: 1.5rem;
+    }
+
+    .merch-item h4 {
+      margin: 0 0 0.75rem;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: var(--color-bg-light);
+    }
+
+    .merch-item p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: rgba(247, 246, 242, 0.78);
+    }
+
+    .cleaning-section {
+      background-color: var(--color-bg-dark);
+      color: var(--color-bg-light);
+      padding: 6rem 1.5rem;
+    }
+
+    .cleaning-section__inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 440px);
+      gap: 3rem;
+      align-items: center;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .cleaning-section h2 {
+      margin-bottom: 1.25rem;
+      font-size: clamp(2.5rem, 5vw, 4.25rem);
+      color: var(--color-bg-light);
+    }
+
+    .cleaning-section__lead {
+      max-width: 58ch;
+      margin: 0 0 2rem;
+      font-size: 1.02rem;
+      font-weight: 300;
+      color: rgba(247, 246, 242, 0.82);
+    }
+
+    .cleaning-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .cleaning-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      color: rgba(247, 246, 242, 0.92);
+    }
+
+    .cleaning-check {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      color: var(--color-accent-brass);
+      margin-top: 0.12rem;
+    }
+
+    .cleaning-visual {
+      display: flex;
+      justify-content: center;
+    }
+
+    .cleaning-phone {
+      position: relative;
+      width: min(100%, 360px);
+      aspect-ratio: 10 / 18.5;
+      padding: 14px;
+      border: 1px solid rgba(189, 165, 115, 0.45);
+      border-radius: 34px;
+      background: linear-gradient(180deg, #1f211f 0%, #121312 100%);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    .cleaning-phone::before {
+      content: "";
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      width: 38%;
+      height: 20px;
+      transform: translateX(-50%);
+      border-radius: 0 0 14px 14px;
+      background: rgba(0, 0, 0, 0.55);
+    }
+
+    .cleaning-phone__screen {
+      position: relative;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 24px;
+      padding: 1.25rem;
+      background:
+        radial-gradient(circle at top right, rgba(189, 165, 115, 0.14), transparent 34%),
+        linear-gradient(180deg, rgba(79, 99, 76, 0.26), rgba(247, 246, 242, 0.04)),
+        rgba(247, 246, 242, 0.03);
+    }
+
+    .cleaning-phone__screen::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(rgba(247, 246, 242, 0.04), rgba(247, 246, 242, 0.01)),
+        url("assets/bg.png") center / cover;
+      opacity: 0.12;
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .cleaning-phone__header {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 1.4rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: rgba(247, 246, 242, 0.62);
+    }
+
+    .cleaning-phone__header span {
+      color: var(--color-accent-brass);
+    }
+
+    .cleaning-phone__body {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: calc(100% - 2rem);
+    }
+
+    .cleaning-alert {
+      width: 100%;
+      padding: 1.1rem 1rem;
+      border: 1px solid rgba(247, 246, 242, 0.22);
+      border-radius: 22px;
+      background: rgba(247, 246, 242, 0.1);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .cleaning-alert__meta {
+      display: block;
+      margin-bottom: 0.7rem;
+      font-size: 0.76rem;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: rgba(247, 246, 242, 0.68);
+    }
+
+    .cleaning-alert__message {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--color-bg-light);
+    }
+
+    .maintenance-section {
+      background-color: var(--color-bg-light);
+      color: var(--color-text-dark);
+      padding: 6rem 1.5rem;
+    }
+
+    .maintenance-section__inner {
+      display: grid;
+      grid-template-columns: minmax(380px, 500px) minmax(0, 1fr);
+      gap: 4rem;
+      align-items: center;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .maintenance-section__eyebrow {
+      margin-bottom: 0.85rem;
+      color: var(--color-accent-green);
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .maintenance-section h2 {
+      margin-bottom: 1.25rem;
+      font-size: clamp(2.5rem, 5vw, 4.25rem);
+      color: var(--color-bg-dark);
+    }
+
+    .maintenance-section__lead {
+      max-width: 58ch;
+      margin: 0;
+      font-size: 1.02rem;
+      font-weight: 300;
+      color: rgba(42, 44, 43, 0.82);
+    }
+
+    .maintenance-visual {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .maintenance-receipt {
+      position: relative;
+      width: min(100%, 460px);
+      padding: 2rem 2rem 1.9rem;
+      border: 1px solid rgba(189, 165, 115, 0.18);
+      background:
+        linear-gradient(180deg, rgba(247, 246, 242, 0.9), rgba(255, 255, 255, 1)),
+        #ffffff;
+      box-shadow: 0 24px 60px rgba(42, 44, 43, 0.1);
+    }
+
+    .maintenance-receipt::before,
+    .maintenance-receipt::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 14px;
+      background:
+        linear-gradient(-45deg, transparent 75%, var(--color-bg-light) 75%) 0 0 / 14px 14px,
+        linear-gradient(45deg, transparent 75%, var(--color-bg-light) 75%) 7px 0 / 14px 14px;
+    }
+
+    .maintenance-receipt::before {
+      top: -14px;
+    }
+
+    .maintenance-receipt::after {
+      bottom: -14px;
+      transform: rotate(180deg);
+    }
+
+    .maintenance-receipt__header {
+      margin-bottom: 0.35rem;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2.15rem;
+      font-weight: 600;
+      color: var(--color-accent-green);
+    }
+
+    .maintenance-line {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 0;
+      border-bottom: 1px dashed rgba(42, 44, 43, 0.12);
+      font-size: 0.98rem;
+    }
+
+    .maintenance-line:last-of-type {
+      border-bottom: none;
+    }
+
+    .maintenance-line__label {
+      flex-shrink: 0;
+      max-width: 42%;
+      font-weight: 500;
+      color: var(--color-bg-dark);
+    }
+
+    .maintenance-line__dots {
+      flex: 1;
+      height: 1px;
+      background-image: linear-gradient(to right, rgba(42, 44, 43, 0.18) 33%, rgba(255, 255, 255, 0) 0%);
+      background-position: center;
+      background-size: 8px 1px;
+      background-repeat: repeat-x;
+      opacity: 0.9;
+    }
+
+    .maintenance-line__value {
+      flex-shrink: 0;
+      text-align: right;
+      font-size: 0.92rem;
+      color: rgba(42, 44, 43, 0.68);
+      white-space: nowrap;
+    }
+
+    .maintenance-total {
+      margin-top: 1.4rem;
+      padding: 1rem 1.1rem 0;
+      border-top: 1px solid rgba(79, 99, 76, 0.2);
+      font-family: "Cormorant Garamond", serif;
+      font-size: 2.05rem;
+      font-weight: 700;
+      color: var(--color-accent-green);
+    }
+
+    .maintenance-total__label,
+    .maintenance-total__text {
+      display: block;
+    }
+
+    .maintenance-total__label {
+      margin-bottom: 0.15rem;
+      font-size: 0.9em;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .homestaging-section {
+      padding: 6rem 1.5rem;
+      background:
+        radial-gradient(circle at top left, rgba(189, 165, 115, 0.14), transparent 30%),
+        linear-gradient(180deg, rgba(247, 246, 242, 1), rgba(247, 246, 242, 0.94));
+      color: var(--color-text-dark);
+    }
+
+    .homestaging-section__inner {
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .homestaging-section__header {
+      max-width: 900px;
+      margin: 0 auto 3rem;
+      text-align: center;
+    }
+
+    .homestaging-section h2 {
+      margin-bottom: 1rem;
+      font-size: clamp(2.5rem, 5vw, 4.25rem);
+      color: var(--color-bg-dark);
+    }
+
+    .homestaging-section__lead {
+      margin: 0;
+      font-size: 1.03rem;
+      font-weight: 300;
+      color: rgba(42, 44, 43, 0.82);
+    }
+
+    .income-calculator {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, 420px);
+      gap: 2rem;
+      align-items: stretch;
+      padding: 2rem;
+      border: 1px solid rgba(189, 165, 115, 0.65);
+      background: #ffffff;
+      box-shadow: 0 18px 45px rgba(42, 44, 43, 0.08);
+    }
+
+    .income-calculator__controls {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .calculator-field {
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .calculator-field__top {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .calculator-label {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--color-bg-dark);
+    }
+
+    .calculator-value {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-accent-green);
+      white-space: nowrap;
+    }
+
+    .calculator-range {
+      width: 100%;
+      accent-color: var(--color-accent-green);
+      cursor: pointer;
+    }
+
+    .calculator-hint {
+      font-size: 0.8rem;
+      color: rgba(42, 44, 43, 0.5);
+    }
+
+    .income-calculator__result {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 1.6rem;
+      border: 1px solid rgba(189, 165, 115, 0.28);
+      background:
+        linear-gradient(180deg, rgba(79, 99, 76, 0.05), rgba(189, 165, 115, 0.08));
+    }
+
+    .calculator-result__label {
+      margin-bottom: 0.9rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      color: var(--color-accent-green);
+    }
+
+    .calculator-result__value {
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      font-weight: 700;
+      line-height: 0.95;
+      color: var(--color-bg-dark);
+    }
+
+    .calculator-result__period {
+      display: block;
+      margin-top: 0.35rem;
+      font-size: 1rem;
+      font-family: "Montserrat", sans-serif;
+      font-weight: 500;
+      color: var(--color-accent-green);
+    }
+
+    .lead-magnet {
+      padding: 6rem 1.5rem;
+      color: var(--color-bg-light);
+      background:
+        radial-gradient(circle at top left, rgba(189, 165, 115, 0.18), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(79, 99, 76, 0.24), transparent 32%),
+        linear-gradient(135deg, rgba(42, 44, 43, 0.98), rgba(79, 99, 76, 0.92));
+    }
+
+    .lead-magnet__inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem;
+      text-align: center;
+      border: 1px solid rgba(189, 165, 115, 0.34);
+      background: rgba(247, 246, 242, 0.03);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      box-shadow: 0 28px 60px rgba(15, 16, 16, 0.26);
+    }
+
+    .lead-magnet h2 {
+      margin-bottom: 1rem;
+      font-size: clamp(2.5rem, 5vw, 4.4rem);
+      color: var(--color-bg-light);
+    }
+
+    .lead-magnet__lead {
+      max-width: 760px;
+      margin: 0 auto 2rem;
+      font-size: 1.02rem;
+      font-weight: 300;
+      color: rgba(247, 246, 242, 0.84);
+    }
+
+    .lead-magnet__form {
+      display: flex;
+      gap: 1rem;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .lead-magnet__field {
+      flex: 1 1 260px;
+      min-height: 58px;
+      padding: 0 1.1rem;
+      border: 1px solid rgba(189, 165, 115, 0.65);
+      background: rgba(247, 246, 242, 0.04);
+      color: var(--color-bg-light);
+      font: inherit;
+      outline: none;
+      transition: border-color 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .lead-magnet__field::placeholder {
+      color: rgba(247, 246, 242, 0.52);
+    }
+
+    .lead-magnet__field:focus {
+      border-color: rgba(189, 165, 115, 0.95);
+      background: rgba(247, 246, 242, 0.08);
+      box-shadow: 0 0 0 3px rgba(189, 165, 115, 0.12);
+    }
+
+    .lead-magnet .btn-solid {
+      position: relative;
+      min-height: 58px;
+      padding: 0 2.2rem;
+      border: 1px solid rgba(189, 165, 115, 0.7);
+      background:
+        linear-gradient(135deg, rgba(79, 99, 76, 0.96), rgba(42, 44, 43, 0.92));
+      color: var(--color-bg-light);
+      box-shadow: 0 18px 40px rgba(20, 22, 21, 0.28);
+      overflow: hidden;
+    }
+
+    .lead-magnet .btn-solid::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border: 1px solid rgba(189, 165, 115, 0.28);
+      pointer-events: none;
+    }
+
+    .lead-magnet .btn-solid:hover,
+    .lead-magnet .btn-solid:focus-visible {
+      background:
+        linear-gradient(135deg, rgba(189, 165, 115, 0.92), rgba(79, 99, 76, 0.96));
+      color: var(--color-bg-light);
+      border-color: rgba(189, 165, 115, 0.95);
+      transform: translateY(-3px);
+      box-shadow: 0 24px 50px rgba(20, 22, 21, 0.34);
+    }
+
+    .mobile-cta {
+      display: none;
+    }
+
+    .site-footer {
+      background-color: var(--color-bg-dark);
+      border-top: 1px solid rgba(189, 165, 115, 0.45);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--color-bg-light);
+    }
+
+    .site-footer__brand {
+      display: block;
+      margin-bottom: 0.35rem;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.9rem;
+      font-weight: 600;
+      color: var(--color-accent-brass);
+    }
+
+    .site-footer__copy {
+      margin: 0;
+      font-size: 0.9rem;
+      color: rgba(247, 246, 242, 0.72);
+    }
+
+    @media (max-width: 900px) {
+      .site-header__inner {
+        position: relative;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .site-nav {
+        position: absolute;
+        top: calc(100% + 1px);
+        left: 1rem;
+        right: 1rem;
+        display: block;
+        padding: 0.9rem 1rem;
+        border: 1px solid rgba(189, 165, 115, 0.35);
+        background: rgba(42, 44, 43, 0.98);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+      }
+
+      .site-header.is-open .site-nav {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .site-nav ul {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.85rem;
+      }
+
+      .site-nav a {
+        font-size: 0.82rem;
+        letter-spacing: 1.6px;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        flex-shrink: 0;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.15rem, 9vw, 3.35rem);
+        letter-spacing: 2px;
+      }
+
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      .grid-4 {
+        grid-template-columns: 1fr;
+      }
+
+      .cleaning-section__inner {
+        grid-template-columns: 1fr;
+      }
+
+      .cleaning-visual {
+        justify-content: flex-start;
+      }
+
+      .cleaning-phone {
+        width: min(100%, 340px);
+      }
+
+      .maintenance-section__inner {
+        grid-template-columns: 1fr;
+      }
+
+      .maintenance-visual {
+        order: 2;
+        justify-content: flex-start;
+      }
+
+      .income-calculator {
+        grid-template-columns: 1fr;
+      }
+
+      .lead-magnet__inner {
+        padding: 2rem 1.25rem;
+      }
+
+      .lead-magnet__form {
+        flex-direction: column;
+      }
+
+      .mobile-cta {
+        position: fixed;
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        z-index: 1100;
+        display: flex;
+        justify-content: center;
+      }
+
+      .mobile-cta .btn-solid {
+        position: relative;
+        width: 100%;
+        min-height: 56px;
+        border: 1px solid rgba(189, 165, 115, 0.7);
+        background:
+          linear-gradient(135deg, rgba(79, 99, 76, 0.96), rgba(42, 44, 43, 0.92));
+        color: var(--color-bg-light);
+        box-shadow: 0 18px 40px rgba(20, 22, 21, 0.32);
+      }
+
+      .mobile-cta .btn-solid::before {
+        content: "";
+        position: absolute;
+        inset: 4px;
+        border: 1px solid rgba(189, 165, 115, 0.28);
+        pointer-events: none;
+      }
+
+      .site-footer {
+        padding-bottom: 5.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand-mark" href="#top" aria-label="Хозяин Барин">
+        <img class="brand-mark__image" src="assets/logo.png" alt="Логотип Хозяин Барин">
+        <span class="brand-mark__text">
+          <span class="brand-mark__title">Хозяин Барин</span>
+          <span class="brand-mark__subtitle">Бутик-сервис загородной недвижимости</span>
+        </span>
+      </a>
+      <nav class="site-nav" id="site-nav" aria-label="Основная навигация">
+        <ul>
+          <li><a href="#services">Сервис</a></li>
+          <li><a href="#merch">Атрибутика</a></li>
+          <li><a href="#homestaging">Доходность</a></li>
+          <li><a href="#contact">Контакты</a></li>
+        </ul>
+      </nav>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Открыть меню">
+        <span class="menu-toggle__lines"></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="hero__inner">
+        <h1>Хозяин Барин</h1>
+        <p>Бутик-сервис загородной недвижимости для владельцев, которым важны приватность, безупречный уход за домом и деликатное сопровождение каждого запроса.</p>
+        <div class="hero__actions">
+          <a class="btn-solid" href="#contact">Заказать обслуживание</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="services__inner">
+        <div class="services__header">
+          <div class="services__eyebrow">Изысканный сервис загородной жизни</div>
+          <h2>Искусство Приёма</h2>
+        </div>
+
+        <div class="grid-3">
+          <article class="service-card">
+            <div class="service-icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 100 100" class="service-icon" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M50 10 L85 25 V45 C85 70 50 90 50 90 C50 90 15 70 15 45 V25 Z" stroke="var(--color-accent-brass)"></path>
+                <path d="M35 55 L50 40 L65 55 V70 H35 Z" stroke="var(--color-accent-green)"></path>
+                <path d="M58 48 V35 H63 V43" stroke="var(--color-accent-green)"></path>
+                <circle cx="50" cy="55" r="3" fill="var(--color-accent-brass)" stroke="none"></circle>
+                <path d="M48 56 L47 62 H53 L52 56 Z" fill="var(--color-accent-brass)" stroke="none"></path>
+              </svg>
+            </div>
+            <h3>Доверительное Управление</h3>
+            <p>Полный контроль за загородным домом, коммуникациями и сервисными подрядчиками в вашем отсутствии.</p>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 100 100" class="service-icon" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="50" cy="50" r="28" stroke="var(--color-accent-brass)"></circle>
+                <path d="M50 24 C42 24 36 30 36 38 C36 48 50 62 50 62 C50 62 64 48 64 38 C64 30 58 24 50 24 Z" stroke="var(--color-accent-green)"></path>
+                <path d="M43 66 C46 61 54 61 57 66" stroke="var(--color-accent-green)"></path>
+                <path d="M33 73 C38 68 44 66 50 66 C56 66 62 68 67 73" stroke="var(--color-accent-brass)"></path>
+                <path d="M50 31 V45" stroke="var(--color-accent-green)"></path>
+                <path d="M43 38 H57" stroke="var(--color-accent-green)"></path>
+                <circle cx="50" cy="38" r="3" fill="var(--color-accent-brass)" stroke="none"></circle>
+              </svg>
+            </div>
+            <h3>Эстетика и Декор</h3>
+            <p>Сезонное обновление интерьера, подготовка к приёму гостей и деликатная работа с атмосферой дома.</p>
+          </article>
+
+          <article class="service-card">
+            <div class="service-icon-badge" aria-hidden="true">
+              <svg viewBox="0 0 100 100" class="service-icon" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="24" y="22" width="52" height="56" rx="12" stroke="var(--color-accent-brass)"></rect>
+                <path d="M38 43 H62" stroke="var(--color-accent-green)"></path>
+                <path d="M38 55 H62" stroke="var(--color-accent-green)"></path>
+                <path d="M38 67 H54" stroke="var(--color-accent-green)"></path>
+                <path d="M50 22 V14" stroke="var(--color-accent-brass)"></path>
+                <path d="M42 16 H58" stroke="var(--color-accent-brass)"></path>
+                <circle cx="66" cy="34" r="8" stroke="var(--color-accent-green)"></circle>
+                <path d="M66 29 V39" stroke="var(--color-accent-green)"></path>
+                <path d="M61 34 H71" stroke="var(--color-accent-green)"></path>
+                <circle cx="66" cy="34" r="2.5" fill="var(--color-accent-brass)" stroke="none"></circle>
+              </svg>
+            </div>
+            <h3>Бутиковый Уровень</h3>
+            <p>Персональный стандарт обслуживания для собственников, ценящих приватность, статус и безупречные детали.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cleaning-section" id="cleaning">
+      <div class="cleaning-section__inner">
+        <div class="cleaning-section__text">
+          <h2>Отельный стандарт и прозрачность</h2>
+          <p class="cleaning-section__lead">
+            Забудьте о проверках. Как только клинер заканчивает работу, система автоматически отправляет вам фотоотчет идеального порядка.
+          </p>
+
+          <ul class="cleaning-list">
+            <li>
+              <svg class="cleaning-check" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M20 7L9.5 17.5L4 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <span>Контроль кухни, санузлов и гостевых зон по фиксированному чек-листу.</span>
+            </li>
+            <li>
+              <svg class="cleaning-check" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M20 7L9.5 17.5L4 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <span>Фотофиксация финального состояния интерьера сразу после завершения работ.</span>
+            </li>
+            <li>
+              <svg class="cleaning-check" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M20 7L9.5 17.5L4 12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+              <span>Мгновенное уведомление о готовности дома к вашему приезду или заезду гостей.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="cleaning-visual">
+          <div class="cleaning-phone" aria-hidden="true">
+            <div class="cleaning-phone__screen">
+              <div class="cleaning-phone__header">Уведомление от <span>Telegram Bot</span></div>
+              <div class="cleaning-phone__body">
+                <div class="cleaning-alert">
+                  <span class="cleaning-alert__meta">Фотоотчет уборки</span>
+                  <p class="cleaning-alert__message">✅ Уборка завершена. Дом готов к заезду. Смотреть фотоотчет.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="maintenance-section" id="maintenance">
+      <div class="maintenance-section__inner">
+        <div class="maintenance-visual">
+          <div class="maintenance-receipt">
+              <div class="maintenance-receipt__header">Чек сохраненных нервов</div>
+
+              <div class="maintenance-line">
+                <span class="maintenance-line__label">Замена розетки</span>
+                <span class="maintenance-line__dots" aria-hidden="true"></span>
+                <span class="maintenance-line__value">0 сорванных выходных</span>
+              </div>
+
+              <div class="maintenance-line">
+                <span class="maintenance-line__label">Настройка бойлера</span>
+                <span class="maintenance-line__dots" aria-hidden="true"></span>
+                <span class="maintenance-line__value">0 гневных отзывов</span>
+              </div>
+
+              <div class="maintenance-line">
+                <span class="maintenance-line__label">Вызов сантехника</span>
+                <span class="maintenance-line__dots" aria-hidden="true"></span>
+                <span class="maintenance-line__value">0₽ (включено в тариф)</span>
+              </div>
+
+            <div class="maintenance-total">
+              <span class="maintenance-total__label">Итого:</span>
+              <span class="maintenance-total__text">Ваши нервы спасены</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="maintenance-section__text">
+          <div class="maintenance-section__eyebrow">Технический надзор</div>
+          <h2>Чиним до того, как заметят гости</h2>
+          <p class="maintenance-section__lead">
+            Наш мастер проводит превентивный осмотр при каждом выезде. Мы меняем фильтры, настраиваем котлы и устраняем поломки без вашего участия.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="merch-section" id="merch">
+      <div class="merch-section__inner">
+        <div class="merch-section__header">
+          <h2>Барское Внимание к Деталям</h2>
+          <p class="merch-section__subtitle">Фирменная атрибутика для вашего дома</p>
+        </div>
+
+        <div class="grid-4">
+          <article class="merch-item">
+            <img class="mockup-img" src="assets/atribute_01.png" alt="Фирменная косметика">
+            <div class="merch-item__body">
+              <h4>Косметика</h4>
+              <p>Линейка деликатного ухода, созданная для ванных комнат, гостевых резиденций и приватных spa-зон.</p>
+            </div>
+          </article>
+
+          <article class="merch-item">
+            <img class="mockup-img" src="assets/atribute_02.png" alt="Фирменные свечи">
+            <div class="merch-item__body">
+              <h4>Свечи</h4>
+              <p>Ароматическая коллекция для мягкого вечернего света, камерной атмосферы и тонкого впечатления о доме.</p>
+            </div>
+          </article>
+
+          <article class="merch-item">
+            <img class="mockup-img" src="assets/atribute_03.png" alt="Фирменный текстиль">
+            <div class="merch-item__body">
+              <h4>Текстиль</h4>
+              <p>Тактильные детали для спален, террас и гостевых пространств, поддерживающие единый стиль сервиса.</p>
+            </div>
+          </article>
+
+          <article class="merch-item">
+            <img class="mockup-img" src="assets/atribute_04.png" alt="Книга гостей">
+            <div class="merch-item__body">
+              <h4>Книги гостей</h4>
+              <p>Памятные альбомы и журналы впечатлений для резиденций, в которых хочется оставлять красивые слова.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="homestaging-section" id="homestaging">
+      <div class="homestaging-section__inner">
+        <div class="homestaging-section__header">
+          <h2>Эстетика, которая приносит деньги</h2>
+          <p class="homestaging-section__lead">
+            Деликатный хоумстейджинг увеличивает стоимость суток на 20-30%. Мы интегрируем в интерьер стильный текстиль, правильный свет и эксклюзивный декор (включая уникальные элементы, созданные специально под ваш дом), чтобы объект выделялся на фоне конкурентов.
+          </p>
+        </div>
+
+        <div class="income-calculator">
+          <div class="income-calculator__controls">
+            <div class="calculator-field">
+              <div class="calculator-field__top">
+                <label class="calculator-label" for="dailyRate">Текущая цена за сутки</label>
+                <span class="calculator-value" id="dailyRateValue">10 000 ₽</span>
+              </div>
+              <input class="calculator-range" id="dailyRate" type="range" min="3000" max="20000" step="500" value="10000">
+              <span class="calculator-hint">От 3 000 ₽ до 20 000 ₽</span>
+            </div>
+
+            <div class="calculator-field">
+              <div class="calculator-field__top">
+                <label class="calculator-label" for="monthlyLoad">Загрузка в месяц</label>
+                <span class="calculator-value" id="monthlyLoadValue">15 дней</span>
+              </div>
+              <input class="calculator-range" id="monthlyLoad" type="range" min="5" max="30" step="1" value="15">
+              <span class="calculator-hint">От 5 до 30 дней</span>
+            </div>
+          </div>
+
+          <div class="income-calculator__result">
+            <div class="calculator-result__label">Потенциальный доход со Smart-декором</div>
+            <div class="calculator-result__value" id="incomeResult">
+              187 500 ₽
+              <span class="calculator-result__period">/мес</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="lead-magnet" id="contact">
+      <div class="lead-magnet__inner">
+        <h2>Узнайте скрытый потенциал вашего дома</h2>
+        <p class="lead-magnet__lead">
+          Оставьте ссылку на ваше объявление (Авито, Суточно.ру). Наш декоратор проведет бесплатный аудит и пришлет PDF-отчет с точками роста вашей прибыли.
+        </p>
+
+        <form class="lead-magnet__form">
+          <input class="lead-magnet__field" type="url" name="listing" placeholder="Ссылка на объявление">
+          <input class="lead-magnet__field" type="text" name="contact" placeholder="Ваш телефон / Telegram">
+          <button class="btn-solid" type="submit">Получить разбор</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span class="site-footer__brand">Хозяин Барин</span>
+    <p class="site-footer__copy">© 2026 Хозяин Барин. Бутик-сервис загородной недвижимости.</p>
+  </footer>
+
+  <div class="mobile-cta">
+    <a class="btn-solid" href="#contact">Заказать аудит</a>
+  </div>
+
+  <script>
+    const dailyRateInput = document.getElementById("dailyRate");
+    const monthlyLoadInput = document.getElementById("monthlyLoad");
+    const dailyRateValue = document.getElementById("dailyRateValue");
+    const monthlyLoadValue = document.getElementById("monthlyLoadValue");
+    const incomeResult = document.getElementById("incomeResult");
+    const siteHeader = document.querySelector(".site-header");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const mobileNavLinks = document.querySelectorAll(".site-nav a");
+
+    function formatNumber(value) {
+      return new Intl.NumberFormat("ru-RU").format(value);
+    }
+
+    function updateIncomeCalculator() {
+      const dailyRate = Number(dailyRateInput.value);
+      const monthlyLoad = Number(monthlyLoadInput.value);
+      const enhancedIncome = Math.round(dailyRate * monthlyLoad * 1.25);
+
+      dailyRateValue.textContent = formatNumber(dailyRate) + " ₽";
+      monthlyLoadValue.textContent = monthlyLoad + " дней";
+      incomeResult.innerHTML = formatNumber(enhancedIncome) + " ₽<span class=\"calculator-result__period\">/мес</span>";
+    }
+
+    dailyRateInput.addEventListener("input", updateIncomeCalculator);
+    monthlyLoadInput.addEventListener("input", updateIncomeCalculator);
+    updateIncomeCalculator();
+
+    function closeMobileMenu() {
+      siteHeader.classList.remove("is-open");
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Открыть меню");
+    }
+
+    menuToggle.addEventListener("click", function () {
+      const isOpen = siteHeader.classList.toggle("is-open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute("aria-label", isOpen ? "Закрыть меню" : "Открыть меню");
+    });
+
+    mobileNavLinks.forEach(function (link) {
+      link.addEventListener("click", closeMobileMenu);
+    });
+  </script>
+</body>
+</html>
